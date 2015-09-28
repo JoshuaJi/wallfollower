@@ -57,9 +57,9 @@ public class Odometer extends Thread {
 
 			nowTachoL = leftMotor.getTachoCount(); // get tacho counts
 			nowTachoR = rightMotor.getTachoCount();
-			distL = 3.14159 * WR * (nowTachoL - lastTachoL) / 180; // compute
+			distL = Math.PI * WR * (nowTachoL - lastTachoL) / 180; // compute
 																	// wheel
-			distR = 3.14159 * WR * (nowTachoR - lastTachoR) / 180; // displacements
+			distR = Math.PI * WR * (nowTachoR - lastTachoR) / 180; // displacements
 			lastTachoL = nowTachoL; // save tacho counts for next iteration
 			lastTachoR = nowTachoR;
 			deltaD = 0.5 * (distL + distR); // compute vehicle displacement

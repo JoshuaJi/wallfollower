@@ -7,7 +7,7 @@ package ev3Odometer;
 import lejos.hardware.lcd.TextLCD;
 
 public class OdometryDisplay extends Thread {
-	private static final long DISPLAY_PERIOD = 250;
+	private static final long DISPLAY_PERIOD = 1000;
 	private Odometer odometer;
 	private TextLCD t;
 

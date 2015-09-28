@@ -25,13 +25,40 @@ public class OdometryCorrection extends Thread {
 	public void run() {
 		long correctionStart, correctionEnd;
 
+		
 		while (true) {
 			correctionStart = System.currentTimeMillis();
 
+			int xLine = ((int)(Math.abs(odometer.getX())+30))/30;
+			int yLine = ((int)(Math.abs(odometer.getY())+30))/30;
+			double theta = odometer.getTheta();
+			
 			// put your correction code here
 			lightSensor.getRedMode().fetchSample(sampleRed, 0);
 			if(((int)(sampleRed[0]*100)) < 35){
-				Sound.beep();
+				//going up -- -10 < theta < 10
+				if(Math.PI*(-1.0/18)< theta && theta < Math.PI*(1.0/18)){
+					Sound.beep();
+					odometer.setY(15 + 30*(yLine-1));
+				}
+				//going right -- 80<theta<100
+				if(Math.PI*(4.0/9) < theta && theta < Math.PI*(5.0/9)){
+					Sound.buzz();
+					odometer.setX(15+30*(xLine-1));
+				}
+				//going down -- 170<theta<190
+				if(Math.PI*(17.0/18)<theta && theta < Math.PI*(19.0/18)){
+					Sound.beep();
+					odometer.setY(15 + 30*(yLine-1));
+				}
+				//going left -- 260<theta<280
+				if(Math.PI*(13.0/9)<theta && theta < Math.PI*(14.0/9)){
+					Sound.buzz();
+					odometer.setX(15+30*(xLine-1));
+				}
+				else{
+					//Sound.beep();
+				}
 			}
 			
 			
